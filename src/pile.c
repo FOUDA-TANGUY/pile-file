@@ -20,9 +20,12 @@ int nombre_element(Pile* pi)
 void empiler(Pile* pi,info x)
 {
 	element* nouv = new_element();
+	pi->nombre = pi->nombre + 1;
+	
 	nouv->prev = NULL;
 	nouv->value = x;
 	nouv->suiv = pi->sommet;
+
 	if(est_vide(pi))
 	{
 		pi->sommet = nouv;
@@ -30,7 +33,7 @@ void empiler(Pile* pi,info x)
 	}
 	pi->sommet->prev = nouv;
 	pi->sommet = nouv;
-	pi->nombre = pi->nombre + 1;
+	
 
 	return;
 }
@@ -49,8 +52,12 @@ info depiler(Pile* pi)
 }
 void vide_pile(Pile* pi)
 {
+	info x;
 	while(!est_vide(pi))
-		depiler(pi);
-
+	{
+		x = depiler(pi);
+		if(x != NULL)
+			free(x);
+	}
 	return;
 }

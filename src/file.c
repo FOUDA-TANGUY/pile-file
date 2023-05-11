@@ -14,7 +14,7 @@ bool file_vide(File* Fi)
         return TRUE;
     return FALSE;
 }
-int nombre_element(File* Fi)
+int nombre_file(File* Fi)
 {
     return Fi->nombre;
 }
@@ -43,13 +43,26 @@ info defiler(File* Fi)
 {
     if(file_vide(Fi))
         return NULL;
+    
+    Fi->nombre = Fi->nombre - 1;
     info x = Fi->tete->value;
     element* elmt = Fi->tete;
     Fi->tete = elmt->suiv;
     if(Fi->tete != NULL)
         Fi->tete->prev = NULL;
+    else
+        Fi->queue = NULL;
+    free(elmt);
+    return x;
 }
 void vide_file(File* Fi)
 {
-
+    info x;
+    while(!file_vide(Fi))
+    {
+        x = defiler(Fi);
+        if(x != NULL)
+            free(x);
+    }
+        
 }
