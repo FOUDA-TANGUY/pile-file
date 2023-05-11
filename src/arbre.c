@@ -104,3 +104,31 @@ int nombre_noeud(abr *ab)
     
     return nombre;
 }
+
+void arb_bin(abr* ab,info* tab,int n)
+{
+    init_abr(ab);
+    if(n < 1)
+        return;
+    File fi;
+    int i = 0;
+    noeud* x = new_noeud((tab + i));
+    ab->racine = x;
+    
+    init_file(&fi);
+    emfiler(&fi,(info)x);
+    i++;
+    while(i < n)
+    {
+        x = (noeud*)defiler(&fi);
+        add_fils(x,(info)(tab));
+        i++;
+        emfiler(&fi,x->fils->value);
+        if(i < n)
+        {
+            add_fils(x,(info)(tab + i));
+            emfiler(&fi,x->fils->value);
+            i++;
+        }
+    }
+}

@@ -24,6 +24,8 @@
     void init_abr(abr*);
     bool abr_vide(abr*);
     int nombre_noeud(abr*);
+    void arb_bin(abr*,info*,int);
+    
 
 
 #endif
