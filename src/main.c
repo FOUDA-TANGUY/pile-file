@@ -3,35 +3,23 @@
 #include <element.h>
 #include <file.h>
 #include <pile.h>
+#include <arbre.h>
 
 int main(void)
 {
-	Pile pi;
-	File fi;
+	noeud* nd = new_noeud(NULL);
+	abr ab;
+	init_noeud(nd);
+	init_abr(&ab);
 
-	// initialisation des elements
-	init_pile(&pi);
-	init_file(&fi);
-	
-	//fonction du nombre d'elements
-	printf("Nombre element de (pile, file) -> (%d, %d)\n",nombre_element(&pi), nombre_file(&fi));
+	ab.racine = nd;
+	add_fils(nd,NULL);
+	add_fils(nd,NULL);
+	printf("nombre element %d\n",nombre_noeud(&ab));
+	add_fils(nd,NULL);
+	add_fils(nd,NULL);
+	printf("nombre element %d\n",nombre_noeud(&ab));
+	free_noeud(nd);
 
-	//fonction d ajout d elements
-	empiler(&pi,NULL);
-	empiler(&pi,NULL);
-	emfiler(&fi,NULL);
-	emfiler(&fi,NULL);
-	printf("Nombre element de (pile, file) -> (%d, %d)\n",nombre_element(&pi), nombre_file(&fi));
-
-	//fonction de retrait d elements avec renvois d elements
-	depiler(&pi);
-	depiler(&pi);
-	defiler(&fi);
-	defiler(&fi);
-	printf("Nombre element de (pile, file) -> (%d, %d)\n",nombre_element(&pi), nombre_file(&fi));
-
-	//fonction de netoyage !!! a utiliser si les element on ete declare dynamiquement
-	vide_pile(&pi);
-	vide_file(&fi);
 	return 0;
 }
